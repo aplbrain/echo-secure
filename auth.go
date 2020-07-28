@@ -17,7 +17,7 @@ import (
 
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo-contrib/session"
 	uuid "github.com/satori/go.uuid"
 	"time"

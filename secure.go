@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/sessions"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo-contrib/session"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4/middleware"
 	"golang.org/x/crypto/acme/autocert"
 	"net/http"
 	"reflect"
@@ -164,8 +164,9 @@ func InitializeEchoSecure(e *echo.Echo, config SecureConfig, secret []byte, sess
 		e.AutoTLSManager.Cache = autocert.DirCache("./cache")
 	}
 
-	e.Pre(middleware.HTTPSRedirect())
-	e.Pre(middleware.HTTPSNonWWWRedirect())
+	// Changing e.Pre -> e.Use
+	e.Use(middleware.HTTPSRedirect())
+	e.Use(middleware.HTTPSNonWWWRedirect())
 
 	enableAuthenticate := false
 	enableAuthorize := false
